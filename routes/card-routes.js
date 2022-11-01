@@ -1,9 +1,9 @@
 import express from "express";
-import myDB from "../db/MyMongoDB.js";
+import myDB from "../db/cardsDB.js";
 
-const router = express.Router();
+const cardrouter = express.Router();
 
-router.post("/createNewCard", async (req, res) => {
+cardrouter.post("/createNewCard", async (req, res) => {
   const user = req.body;
   if (await myDB.authenticate(user)) {
     req.session.user = user.username;
@@ -20,11 +20,11 @@ router.post("/createNewCard", async (req, res) => {
 //   res.send("hello ");
 // });
 
-router.get("/getUsers", (req, res) => {
-  res.json({ user: req.session.user });
-});
+// cardrouter.get("/getUsers", (req, res) => {
+//   res.json({ user: req.session.user });
+// });
 
-router.get("/getCards", async (req, res) => {
+cardrouter.get("/getCards", async (req, res) => {
   const current = req.session.user;
   if (current !== undefined) {
     const ret = await myDB.fetchingCards(current);
@@ -34,7 +34,7 @@ router.get("/getCards", async (req, res) => {
   }
 });
 
-router.get("/deleteCard/:id", async (req, res) => {
+cardrouter.get("/deleteCard/:id", async (req, res) => {
   const id = req.params.id;
   console.log("router delete");
   if (id !== undefined) {
@@ -54,4 +54,4 @@ router.get("/deleteCard/:id", async (req, res) => {
   // }
 });
 
-export default router;
+export default cardrouter;

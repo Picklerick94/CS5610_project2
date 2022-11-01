@@ -6,7 +6,7 @@ function MyMongoDB() {
     "mongodb+srv://jason:1234@cluster0.g3bcu3h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
   const DB_name = "businessCardDB";
-  const collections = "user";
+  const collections = "cards";
 
   myDB.authenticate = async (user) => {
     const client = new MongoClient(url);

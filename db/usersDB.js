@@ -1,11 +1,12 @@
-import { MongoClient } from 'mongodb';
-import dotenv from 'dotenv';
-dotenv.config({ path: './config/config.env' });
+import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+dotenv.config({ path: "./config/config.env" });
 function MyMongoDB() {
   const myDB = {};
-  const url = process.env.MOGO_URL || 'mongodb://localhost:27017';
-  const DB_NAME = 'businessCardDB';
-  const USER_COLLECTION = 'users';
+  const url =
+    "mongodb+srv://jason:1234@cluster0.g3bcu3h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  const DB_NAME = "businessCardDB";
+  const USER_COLLECTION = "users";
 
   //Chun-Wei Tseng
   myDB.authenticate = async (user) => {
@@ -14,48 +15,50 @@ function MyMongoDB() {
       client = new MongoClient(url);
       const db = client.db(DB_NAME);
       const usersCol = db.collection(USER_COLLECTION);
-      console.log('searching for', user);
+      console.log("searching for", user);
       const res = await usersCol.findOne({ email: user.loginName });
-      console.log('res', res);
+      console.log("res", res);
       // console.log('res', res, res.password === user.loginPassword);
       if (res) {
         if (res.password === user.loginPassword) {
-          console.log('true');
+          console.log("true");
           return true;
         }
       }
       return false;
     } catch (error) {
-      console.log('Closing Connection');
+      console.log("Closing Connection");
       client.close();
     }
   };
 
-  myDB.createUser =  (user) => {
-    let client;
+  myDB.createUser = async (user) => {
+    let client = new MongoClient(url);
     try {
-      client = new MongoClient(url);
       const db = client.db(DB_NAME);
       const usersCol = db.collection(USER_COLLECTION);
-      console.log(`creating user`, user);
-      const res = usersCol.find({
+      console.log("creating user", user);
+      const res = await usersCol.findOne({
         $or: [
-          { name: user.register },
-          { username: user.registerUsername },
-          { email: user.registerEmail },
+          { name: user.name },
+          { username: user.username },
+          { email: user.email },
         ],
       });
+
+      console.log("return-------------", res);
       if (res) {
-        // alert('User already exist');
-        console.log('User Already Exist');
+        console.log("User Already Exist");
         return true;
       }
       usersCol.insertOne(user);
-      console.log('User Added!');
-      console.log('Insert Complete:', user);
+      console.log("User Added!");
+      console.log("Insert Complete:", user);
+      const d = await usersCol.findOne({ name: user.name });
+      console.log("check if user added", d);
       return false;
     } finally {
-      console.log('Closing Connection');
+      console.log("Closing Connection");
       client.close();
     }
   };
