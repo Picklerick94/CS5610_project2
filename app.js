@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cardrouter from "./routes/card-routes.js";
+import loginrouter from "./routes/login_routes.js";
 import session from "express-session";
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(
       _expires: null,
       originalMaxAge: null,
       httpOnly: true,
+      maxAge: 60000,
     },
   })
 );
@@ -26,6 +28,8 @@ app.use(
 app.use(bodyParser.json());
 
 app.use(cardrouter);
+
+app.use(loginrouter);
 
 app.use(express.static("frontend"));
 

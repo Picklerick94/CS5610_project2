@@ -20,11 +20,13 @@
   "homepage": "https://github.com/JasonKTChen/CS5610_project2#readme",
   "dependencies": {
     "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "mogodb": "^0.0.1-security",
     "mongodb": "4.11",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "v": "^0.3.0"
   },
   "devDependencies": {
     "eslint": "^8.26.0",
