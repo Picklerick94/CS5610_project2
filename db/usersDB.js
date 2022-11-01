@@ -12,7 +12,9 @@ function MyMongoDB() {
   myDB.authenticate = async (user) => {
     let client;
     try {
+      
       client = new MongoClient(url);
+      client.connect();
       const db = client.db(DB_NAME);
       const usersCol = db.collection(USER_COLLECTION);
       console.log("searching for", user);
@@ -35,6 +37,7 @@ function MyMongoDB() {
   myDB.createUser = async (user) => {
     let client = new MongoClient(url);
     try {
+      client.connect();
       const db = client.db(DB_NAME);
       const usersCol = db.collection(USER_COLLECTION);
       console.log("creating user", user);
@@ -66,7 +69,9 @@ function MyMongoDB() {
   myDB.getUser = async (_email) => {
     let client;
     try {
+      
       client = new MongoClient(url);
+      client.connect();
       const db = client.db(DB_NAME);
       const usersCol = db.collection(USER_COLLECTION);
       const res = await usersCol.findOne({ email: _email });
