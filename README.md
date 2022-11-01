@@ -41,10 +41,13 @@ This website that provides functionality:
 
 
 ### Deploy Architecture
-Our website is host on Heroku. We used AWS as our cloud service provider, and used EC2 instances as our servers for both backend and frontend. We also set up load balancers for autoscaling, which will spin up more servers if CPU capacity is more than 75%.
-For more complete information about the service architecture and instructions, please refer to this [google-doc](https://docs.google.com/document/d/14JMFLfPNHAKBt3-jvD2Vnw_3QoCJuXeDr8CZL8AVm4c/edit?usp=sharing)
+Our website is host on Heroku. We used AWS as our cloud service provider, and used EC2 instances as our servers for both backend and frontend. 
+
+
 
 ### Screenshots
+
+
 
 
 
