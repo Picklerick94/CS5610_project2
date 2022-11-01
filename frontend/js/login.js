@@ -3,37 +3,25 @@
 //Chun-Wei Tseng
 function MyClientModule() {
   const client = {};
+  const spanIsAuth = document.querySelector("span#isAuth");
+  const loginForm = document.getElementById("form-login");
   const registerForm = document.getElementById("form-register");
-  const logEmail = document.querySelector("input[name='loginName']");
-  const logPassword = document.querySelector("input[name='loginPassword']");
-  const registerName = document.querySelector("input[name='registerName']");
-  const registerUserName = document.querySelector(
-    "input[name='registerUsername']"
-  );
-  const registerEmail = document.querySelector("input[name='registerEmail']");
-  const registerPassword = document.querySelector(
-    "input[name='registerPassword']"
-  );
+  // const logEmail = document.querySelector("input[name='loginName']");
+  // const logPassword = document.querySelector("input[name='loginPassword']");
+  // const registerName = document.querySelector("input[name='registerName']");
+  // const registerUserName = document.querySelector(
+  //   "input[name='registerUsername']"
+  // );
+  // const registerEmail = document.querySelector("input[name='registerEmail']");
+  // const registerPassword = document.querySelector(
+  //   "input[name='registerPassword']"
+  // );
 
-  // let currentUser = null;
-  // client.currentUser = currentUser;
-
-  // async function authenticate(_form){
-  //   const loginForm = document.getElementById('form-login');
-  //   if (loginForm){
-  //     loginForm.addEventListener("submit", (evt)=>{
-  //       evt.preventDefault;
-  //       let res;
-  //     try{
-  //       res = await fetch("/login", {method: "POST", body: new URLSearchParams(new FormData(_form))});
-  //       const user = res.json();
-  //     }catch(err){
-  //       alert("There is an error with authentication!");
-  //     }
-  //     });
-  //   }}
+  let currentUser = null;
+  client.currentUser = currentUser;
 
   function checkForErrors() {
+    const msgDiv = document.querySelector("div#message");
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     });
@@ -45,7 +33,7 @@ function MyClientModule() {
   }
 
   async function checkIfLoggedIn() {
-    const res = await fetch("/getuser");
+    const res = await fetch("/getusers");
     const user = await res.json();
     const spanIsAuth = document.querySelector("span#isAuth");
     if (user.user) {
@@ -56,7 +44,7 @@ function MyClientModule() {
     return user.user !== undefined;
   }
 
-  async function checkIfRegistered(registerForm) {
+  async function checkIfRegistered() {
     const res = await fetch("/register", {
       method: "POST",
       body: new URLSearchParams(new FormData(registerForm)),
@@ -68,15 +56,16 @@ function MyClientModule() {
     if (check.isRegistered === true) {
       spanIsReg.innerHTML = "User already exist!";
     } else {
-      spanIsReg.innerHTML = "User registered successfully!";
+      spanIsReg.innerHTML = "User registerd successfully!";
     }
+
     setTimeout(() => {
       window.location.replace("/login.html");
     }, 2000);
   }
 
   const setRegister = () => {
-    let res;
+    // let res;
     if (registerForm) {
       registerForm.addEventListener("submit", (evt) => {
         evt.preventDefault();
@@ -86,9 +75,48 @@ function MyClientModule() {
     }
   };
 
+  async function authenticate(loginForm) {
+    try {
+      const res = await fetch("/login", {
+        method: "POST",
+        body: new URLSearchParams(new FormData(loginForm)),
+      });
+
+      const user = await res.json();
+      console.log("check point user", user);
+      if (user.isLoggedIn === true) {
+        client.currentUser = user.user;
+        console.log("redirect to home page");
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 2000);
+      } else {
+        console.log("redirect to login page");
+
+        setTimeout(() => {
+          window.location.replace("/login");
+        }, 1000);
+        spanIsAuth.innerHTML =
+          "Please try different email/password or sign up if needed!";
+      }
+    } catch (err) {
+      alert("There is an error with authentication!");
+    }
+  }
+
+  const setLogin = () => {
+    // let res;
+    if (loginForm) {
+      loginForm.addEventListener("submit", (evt) => {
+        evt.preventDefault();
+        authenticate(loginForm);
+      });
+    }
+  };
   checkForErrors();
   checkIfLoggedIn();
   setRegister();
+  setLogin();
   // checkIfRegistered();
 }
 MyClientModule();

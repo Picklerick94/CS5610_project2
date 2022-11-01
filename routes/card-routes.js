@@ -1,28 +1,20 @@
+// Kuan Tsa Chen
 import express from "express";
 import myDB from "../db/cardsDB.js";
 
 const cardrouter = express.Router();
 
-cardrouter.post("/createNewCard", async (req, res) => {
-  const user = req.body;
-  if (await myDB.authenticate(user)) {
-    req.session.user = user.username;
-    await myDB.createCard(user);
-    res.redirect("/?msg=authenticated");
-    console.log("successful rediect");
+cardrouter.post("/createCard", async (req, res) => {
+  const card = req.body;
+  // req.session.user = "jason";
+  console.log("current user in createcard", req.session.user);
+  const ret = await myDB.createCard(req.session.user, card);
+  if (ret) {
+    res.redirect("/?msg=creart card sucessfully");
   } else {
-    res.redirect("/?msg=error authenticated");
-    console.log("rediect failure");
+    res.redirect("/?msg=creart card failure");
   }
 });
-
-// router.get("/users", (req, res) => {
-//   res.send("hello ");
-// });
-
-// cardrouter.get("/getUsers", (req, res) => {
-//   res.json({ user: req.session.user });
-// });
 
 cardrouter.get("/getCards", async (req, res) => {
   const current = req.session.user;
@@ -45,13 +37,28 @@ cardrouter.get("/deleteCard/:id", async (req, res) => {
     console.log("undefined");
     res.json({});
   }
-  // res.send("delete id fail");
-  // if (id !== undefined) {
-  //   const ret = await myDB.deleteCard(id);
-  //   res.send(ret);
-  // } else {
-  //   res.send({});
-  // }
 });
 
+cardrouter.post("/updateCard/:id", async (req, res) => {
+  const currentUser = req.session.user;
+  const id = req.params.id;
+  const card = req.body;
+  console.log("CU", currentUser);
+  console.log("ID", id);
+  console.log("CARD", card);
+
+  if (currentUser !== undefined) {
+    // console.log("router card", card);
+    const ret = await myDB.updateCard(currentUser, id, card);
+    if (ret) {
+      res.redirect("/?msg=update card sucessfully");
+    } else {
+      console.log("update fetch failure");
+      res.json({});
+    }
+  } else {
+    console.log("User undefined");
+    res.json({});
+  }
+});
 export default cardrouter;
