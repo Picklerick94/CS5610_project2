@@ -1,0 +1,14 @@
+body{
+    padding: 5% 10%;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+.card{
+    width: 18rem;
+    margin: 1rem;
+}
+div#message{
+    display: none;
+}
