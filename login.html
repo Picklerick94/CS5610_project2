@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <h1>Welcome to the E-Business Card!</h1>
+        <div class="m-2"><span id="isAuth"></span></div>
+        <!--Pill Nav-->
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button
+              class="nav-link active"
+              id="nav-login-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-login"
+              type="button"
+              role="tab"
+              aria-controls="nav-login"
+              aria-selected="true"
+            >
+              Login
+            </button>
+            <button
+              class="nav-link"
+              id="nav-register-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-register"
+              type="button"
+              role="tab"
+              aria-controls="nav-register"
+              aria-selected="false"
+            >
+              Sign Up
+            </button>
+          </div>
+        </nav>
+
+        <!--Pill Content-->
+        <div class="tab-content">
+          <!--Login Tab-->
+          <div
+            class="tab-pane fade show active"
+            id="nav-login"
+            role="tabpanel"
+            aria-labelledby="nav-login-tab"
+          >
+            <form id="form-login" action="/login" method="POST">
+              <!--Email-->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="loginName">Email</label>
+                <input
+                  type="email"
+                  name="loginName"
+                  class="form-control"
+                  placeholder="Please enter your email"
+                  required="true"
+                  autofocus
+                />
+              </div>
+              <!--Password-->
+              <label class="form-label" for="loginPassword">Password</label>
+              <div class="form-outline mb-4">
+                <input
+                  type="password"
+                  name="loginPassword"
+                  class="form-control"
+                  placeholder="Please enter your password"
+                  required="true"
+                />
+              </div>
+              <!--Submit-->
+              <button
+                id="login"
+                type="submit"
+                class="btn btn-primary btn-block mb-4"
+              >
+                Login
+              </button>
+              <!--Register-->
+              <div class="text-center">
+                <p>Not a member?<a href="#nav-register-tab">Register</a></p>
+              </div>
+            </form>
+          </div>
+          <!--Register Tab-->
+          <div
+            class="tab-pane fade"
+            id="nav-register"
+            role="tabpanel"
+            aria-labelledby="nav-register-tab"
+          >
+            <form id="form-register" action="/register" method="POST">
+              <!--Name-->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="registerName">Name</label>
+                <input
+                  type="text"
+                  name="registerName"
+                  class="form-control"
+                  placeholder="Please enter your name"
+                  required="true"
+                />
+              </div>
+              <!--Username-->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="registerUsername"
+                  >Username</label
+                >
+                <input
+                  type="text"
+                  name="registerUsername"
+                  class="form-control"
+                  placeholder="Please enter your username"
+                  required="true"
+                />
+              </div>
+              <!--Email-->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="registerEmail">Email</label>
+                <input
+                  type="email"
+                  name="registerEmail"
+                  class="form-control"
+                  placeholder="Please enter your email"
+                  required="true"
+                />
+              </div>
+              <!--Password-->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="registerPassword"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  id="regPassword"
+                  name="registerPassword"
+                  class="form-control"
+                  placeholder="Please enter your password"
+                  required="true"
+                />
+              </div>
+              <!-- Repeat Password
+              <div class="form-outline mb-4">
+                <label class="form-label" for="registerRepeatPassword"
+                  >Repeat Password</label
+                >
+                <input
+                  type="password"
+                  id="regRepeatPassword"
+                  name="registerRepeatPassword"
+                  class="form-control"
+                  placeholder="Please enter your password again"
+                  required="true"
+                />
+              </div> -->
+              <span class="m-2" id="isRegistered"></span>
+              <button
+                id="signup"
+                type="submit"
+                class="btn btn-primary btn-block mb-3"
+              >
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/login.js"></script>
+  </body>
+</html>
