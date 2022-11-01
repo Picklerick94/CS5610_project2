@@ -11,10 +11,6 @@ app.use(
   session({
     secret: "jason",
     cookie: {
-      path: "/",
-      _expires: null,
-      originalMaxAge: null,
-      httpOnly: true,
       maxAge: 60000,
     },
   })

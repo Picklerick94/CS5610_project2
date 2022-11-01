@@ -16,9 +16,9 @@ function MyMongoDB() {
       const db = client.db(DB_NAME);
       const usersCol = db.collection(USER_COLLECTION);
       console.log("searching for", user);
-      const res = await usersCol.findOne({ email: user.loginName });
+      const res = await usersCol.findOne({ username: user.loginName });
       console.log("res", res);
-      // console.log('res', res, res.password === user.loginPassword);
+
       if (res) {
         if (res.password === user.loginPassword) {
           console.log("true");
@@ -26,7 +26,7 @@ function MyMongoDB() {
         }
       }
       return false;
-    } catch (error) {
+    } finally {
       console.log("Closing Connection");
       client.close();
     }

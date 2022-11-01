@@ -19,7 +19,16 @@
         <div><h1>E-Business Card</h1></div>
         <nav>
           <ul class="nav justify-content-end">
-            <li class="nav-item"><a class="nav-link" href="">Info</a></li>
+            <li class="nav-item">
+              <button
+                id="logout"
+                type="submit"
+                class="btn btn-primary"
+                value="Submit"
+              >
+                Logout
+              </button>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="login.html">Login / Sign Up</a>
             </li>
@@ -28,20 +37,9 @@
       </header>
       <main></main>
 
-      <h1>User is <span id="isAuthenticated"></span></h1>
+      <h1>Hello <span id="isAuthenticated"></span>!</h1>
       <h3>Create new cards</h3>
-      <form action="/createNewCard" method="POST">
-        <div class="mb-3">
-          <label class="form-label">
-            Username
-            <input
-              name="username"
-              type="text"
-              class="form-control"
-              required="true"
-            />
-          </label>
-        </div>
+      <form action="/createCard" method="POST">
         <div class="mb-3">
           <label class="form-label">
             Card name

@@ -14,11 +14,15 @@ function MyWalletModule() {
   }
 
   async function checkIfLoggedIn() {
-    const res = await fetch("/getUsers");
+    const res = await fetch("/getusers");
     const user = await res.json();
+    console.log("current user", user);
+
     const status = document.querySelector("span#isAuthenticated");
     if (user.user !== undefined) {
       status.innerHTML = `${user.user}`;
+    } else {
+      status.innerHTML = "undefined";
     }
     return user.user !== undefined;
   }
@@ -34,23 +38,44 @@ function MyWalletModule() {
       container.innerHTML += `<div class="card" id='card${key}'>
         <img src="..." class="card-img-top" alt="..." />
         <div class="card-body" >
-          <h5 class="card-title">${key}</h5>
-          <p class="card-text">${value}</p>
-          <button id=${key} class="btn btn-primary delete">delete</button>
-          <button class="btn btn-light">modify</button>
+          <div id="cardContent${key}">
+            <h5 class="cardtitle">${key}</h5>
+            <p class="cardtext">${value}</p>
+            <button id="delete${key}" class="btn btn-primary delete">delete</button>
+            <button id="update${key}" class="btn btn-light update">update</button>
+          </div>
+          <form id="updateForm${key}" style="display:none;" action="/updateCard/:${key}" method="POST">
+            <label>Card name: </label><br>
+            <input name="cardname"
+            type="text"
+            class="form-control"
+            placeholder="${key}"
+            disabled
+            />
+            <label>New content: </label><br>
+            <input name="cardcontent"
+            type="text"
+            class="form-control"
+            required="true" 
+            />
+            <button type="button" id="buttonCancel${key}">cancel</button>
+            <button type="submit" id="buttonUpdate${key}">submit</button>
+          </form>
+          
         </div>
       </div>`;
     }
-    function checkID() {
+    function findCardToDelete() {
       const button = document.querySelectorAll(".delete");
       // console.log(button);
       button.forEach((item) => {
         item.addEventListener("click", async () => {
           //handle click
-          const container = document.querySelector(`#card${item.id}`);
+          const id = item.id.slice(6);
+          const container = document.querySelector(`#card${id}`);
           // console.log("current container", container);
-          console.log(item.id);
-          const res = await fetch(`/deleteCard/:${item.id}`);
+          console.log(id);
+          const res = await fetch(`/deleteCard/:${id}`);
           const ret = await res.json();
           console.log(res.status, ret);
           if (res.status === 200) {
@@ -62,13 +87,72 @@ function MyWalletModule() {
         });
       });
     }
-    checkID();
+    function findCardToUpdate() {
+      const button = document.querySelectorAll(".update");
+      // console.log(button);
+      button.forEach((item) => {
+        item.addEventListener("click", async () => {
+          //handle click
+          const id = item.id.slice(6);
+          const updateForm = document.querySelector(`#updateForm${id}`);
+          updateForm.style.display = "block";
+          const cardContent = document.querySelector(`#cardContent${id}`);
+          cardContent.style.display = "none";
+          const buttonCancel = document.querySelector(`#buttonCancel${id}`);
+          buttonCancel.addEventListener("click", () => {
+            cardContent.style.display = "block";
+            updateForm.style.display = "none";
+          });
+          const buttonUpdate = document.querySelector(`#buttonUpdate${id}`);
+          buttonUpdate.addEventListener("click", async () => {
+            const res = await fetch(`/updateCard/:${id}`);
+            const ret = await res.json();
+            console.log(res.status, ret);
+            if (ret) {
+              console.log("mongodb update successfully");
+            } else {
+              console.log("update failure", ret);
+            }
+
+            // const title = document.querySelector(
+            //   `#cardContent${id} .cardtitle`
+            // );
+            // const text = document.querySelector(`#cardContent${id} .cardtext`);
+            // console.log(ret);
+            // title.innerHTML = "new title";
+            // text.innerHTML = "new content";
+            // cardContent.style.display = "block";
+            // updateForm.style.display = "none";
+          });
+          // console.log(item.id);
+        });
+      });
+    }
+    findCardToDelete();
+    findCardToUpdate();
+
     return true;
+  }
+  function logout() {
+    const button = document.querySelector("#logout");
+    button.addEventListener("click", async () => {
+      const res = await fetch("/logout");
+      const ret = await res.json();
+      if (ret.isLoggedOut) {
+        msgDiv.querySelector("#content").innerHTML = "log out successfully";
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 1000);
+      } else {
+        msgDiv.querySelector("#content").innerHTML = "log out failure";
+      }
+    });
   }
 
   checkForErrors();
   checkIfLoggedIn();
   renderCards();
+  logout();
 }
 MyWalletModule();
 
