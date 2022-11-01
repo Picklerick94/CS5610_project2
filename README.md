@@ -47,10 +47,11 @@ Our website is host on Heroku. We used AWS as our cloud service provider, and us
 
 ### Screenshots
 
+![Screen Shot 2022-11-01 at 12 20 41 PM](https://user-images.githubusercontent.com/49644422/199321709-a83ef98a-eca2-46f0-b486-dc9ca7ba2eac.png)
 ![Screen Shot 2022-11-01 at 12 21 21 PM](https://user-images.githubusercontent.com/49644422/199321695-0f4bd2a7-4fe2-4d1a-8d6e-df1acceab47f.png)
 ![Screen Shot 2022-11-01 at 12 20 55 PM](https://user-images.githubusercontent.com/49644422/199321706-333e962d-4581-4731-bab4-adccf477825e.png)
 ![Screen Shot 2022-11-01 at 12 20 50 PM](https://user-images.githubusercontent.com/49644422/199321707-30b9a585-071f-43d5-88b0-e2f58968d557.png)
-![Screen Shot 2022-11-01 at 12 20 41 PM](https://user-images.githubusercontent.com/49644422/199321709-a83ef98a-eca2-46f0-b486-dc9ca7ba2eac.png)
+
 
 
 
