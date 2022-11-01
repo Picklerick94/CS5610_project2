@@ -90,7 +90,10 @@ function MyMongoDB() {
 
   myDB.updateCard = async (currentUser, id, card) => {
     const client = new MongoClient(url);
+<<<<<<< HEAD
     client.connect();
+=======
+>>>>>>> be51e9d307099258686949046ee934b0d9272e77
     try {
       const database = client.db(DB_name);
       const cardsCol = database.collection(collections);
