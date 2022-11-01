@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyBusinessCards</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <h1>User is <span id="isAuthenticated"></span></h1>
+    <h3>Create new cards</h3>
+    <form action="/createNewCard" method="POST">
+      <div class="mb-3">
+        <label class="form-label">
+          Username
+          <input
+            name="username"
+            type="text"
+            class="form-control"
+            required="true"
+          />
+        </label>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">
+          Card name
+          <input
+            name="cardname"
+            type="text"
+            class="form-control"
+            required="true"
+          />
+        </label>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">
+          Card content
+          <input
+            name="cardcontent"
+            type="text"
+            class="form-control"
+            required="true"
+          />
+        </label>
+      </div>
+      <!-- <div class="mb-3">
+        <label class="form-label">
+          Job <input name="job" type="text" class="form-control" required="true"/>
+        </label>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">
+          Company <input name="company" type="text" class="form-control" required="true"/>
+        </label>
+      </div> -->
+      <button type="submit" class="btn btn-primary" value="Submit">
+        Create
+      </button>
+    </form>
+
+    <div
+      class="alert alert-warning alert-dismissible fade show"
+      role="alert"
+      id="message"
+    >
+      <strong>Holy guacamole!</strong> <span id="content"></span>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+
+    <h3>Your cards</h3>
+    <div id="cards">
+      <!-- <div class="card">
+        <img src="..." class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Jimmy</h5>
+          <p class="card-text">I am Jimmy from China.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div> -->
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/wallet.js"></script>
+  </body>
+</html>
