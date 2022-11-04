@@ -4,9 +4,14 @@ import myDB from "../db/cardsDB.js";
 
 const cardrouter = express.Router();
 
+// I think for api requests, could try to use
+// try {
+// db query
+// } catch(e) {
+//  if db connection failed
+// }
 cardrouter.post("/createCard", async (req, res) => {
   const card = req.body;
-  // req.session.user = "jason";
   console.log("current user in createcard", req.session.user);
   const ret = await myDB.createCard(req.session.user, card);
   if (ret) {
@@ -48,7 +53,6 @@ cardrouter.post("/updateCard/:id", async (req, res) => {
   console.log("CARD", card);
 
   if (currentUser !== undefined) {
-    // console.log("router card", card);
     const ret = await myDB.updateCard(currentUser, id, card);
     if (ret) {
       res.redirect("/?msg=update card sucessfully");
