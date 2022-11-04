@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./config/config.env" });
 function MyMongoDB() {
   const myDB = {};
+  //   According to professor's intructions, it would be considered bad practice to leave user name and password of db in public github repo
+  // instead I would suggest to use
+  // process.ENV.MONGO_URI || local db host
   const url =
     "mongodb+srv://jason:1234@cluster0.g3bcu3h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
   const DB_NAME = "businessCardDB";
