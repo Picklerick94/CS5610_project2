@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "type": "module",
+  // Could include the db init script to create local db and import json/csv files
   "scripts": {
     "start": "node ./node_modules/nodemon/bin/nodemon.js app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
