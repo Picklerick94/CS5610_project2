@@ -31,8 +31,6 @@ loginrouter.post("/register", async (req, res) => {
   });
   console.log("ret", ret);
   res.json({ isRegistered: ret });
-  // console.log('')
-  // return ret;
 });
 
 loginrouter.get("/getusers", function (req, res) {
