@@ -6,16 +6,6 @@ function MyClientModule() {
   const spanIsAuth = document.querySelector("span#isAuth");
   const loginForm = document.getElementById("form-login");
   const registerForm = document.getElementById("form-register");
-  // const logEmail = document.querySelector("input[name='loginName']");
-  // const logPassword = document.querySelector("input[name='loginPassword']");
-  // const registerName = document.querySelector("input[name='registerName']");
-  // const registerUserName = document.querySelector(
-  //   "input[name='registerUsername']"
-  // );
-  // const registerEmail = document.querySelector("input[name='registerEmail']");
-  // const registerPassword = document.querySelector(
-  //   "input[name='registerPassword']"
-  // );
 
   let currentUser = null;
   client.currentUser = currentUser;
@@ -65,7 +55,6 @@ function MyClientModule() {
   }
 
   const setRegister = () => {
-    // let res;
     if (registerForm) {
       registerForm.addEventListener("submit", (evt) => {
         evt.preventDefault();
@@ -105,7 +94,6 @@ function MyClientModule() {
   }
 
   const setLogin = () => {
-    // let res;
     if (loginForm) {
       loginForm.addEventListener("submit", (evt) => {
         evt.preventDefault();
@@ -117,6 +105,5 @@ function MyClientModule() {
   checkIfLoggedIn();
   setRegister();
   setLogin();
-  // checkIfRegistered();
 }
 MyClientModule();
