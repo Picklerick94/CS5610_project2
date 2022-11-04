@@ -67,13 +67,11 @@ function MyWalletModule() {
     }
     function findCardToDelete() {
       const button = document.querySelectorAll(".delete");
-      // console.log(button);
       button.forEach((item) => {
         item.addEventListener("click", async () => {
           //handle click
           const id = item.id.slice(6);
           const container = document.querySelector(`#card${id}`);
-          // console.log("current container", container);
           console.log(id);
           const res = await fetch(`/deleteCard/:${id}`);
           const ret = await res.json();
@@ -89,7 +87,6 @@ function MyWalletModule() {
     }
     function findCardToUpdate() {
       const button = document.querySelectorAll(".update");
-      // console.log(button);
       button.forEach((item) => {
         item.addEventListener("click", async () => {
           //handle click
@@ -113,18 +110,7 @@ function MyWalletModule() {
             } else {
               console.log("update failure", ret);
             }
-
-            // const title = document.querySelector(
-            //   `#cardContent${id} .cardtitle`
-            // );
-            // const text = document.querySelector(`#cardContent${id} .cardtext`);
-            // console.log(ret);
-            // title.innerHTML = "new title";
-            // text.innerHTML = "new content";
-            // cardContent.style.display = "block";
-            // updateForm.style.display = "none";
           });
-          // console.log(item.id);
         });
       });
     }
@@ -155,16 +141,3 @@ function MyWalletModule() {
   logout();
 }
 MyWalletModule();
-
-// function deleteCard(id) {
-//   console.log("deleteCard id ", id);
-//   // const res = await fetch(`/deleteCard/:${id}`);
-//   // console.log(res);
-//   // const cards = await res.json();
-//   // if (cards && Object.keys(cards).length === 0) {
-//   //   return false;
-//   // }
-//   // // delete cards.cards[`${id}`];
-//   // const container = document.querySelector(`div#cards#${id}`);
-//   // container.remove();
-// }
